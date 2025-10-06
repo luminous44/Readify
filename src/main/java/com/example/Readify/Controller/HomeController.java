@@ -1,8 +1,10 @@
 package com.example.Readify.Controller;
 
 import com.example.Readify.Entity.LogInData;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,12 @@ public class HomeController {
         return "form";
     }
     @PostMapping("/process")
-    public String processLogin(@ModelAttribute("loginData") LogInData log){
+    public String processLogin(@Valid @ModelAttribute("loginData") LogInData log, BindingResult result){
+
+        if (result.hasErrors()){
+            System.out.println(result);
+        }
+
       return "sucess";
     }
 }
